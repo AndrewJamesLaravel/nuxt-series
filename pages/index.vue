@@ -1,28 +1,23 @@
 <template>
   <div class="container">
     <div>
-      <h1 class="text-4 font-semibold text-gray-800 mb-8">
+      <h1 class="text-4xl font-semibold text-gray-800 mb-8">
         The main index page
       </h1>
-      <button
-        class="bg-gray-700 p-4 border text-white"
-        @click="characterId = characterId + 1"
-      >
-        Next character
-      </button>
-      <button
-        class="bg-yellow-700 p-4 border text-white"
-        @click="characterId = characterId - 1"
-      >
-        Previous character
-      </button>
-      <h3 class="text-2xl">{{ character.name }} id: {{ character.id }}</h3>
-      <ul>
-        <li v-for="character in characters.results" :key="character.id">
-          {{ character.name }}
-          {{ character.status }}
-        </li>
-      </ul>
+      <div class="flex">
+        <ul class="w-64 px-2 text-gray-600">
+          <li v-for="character in characters.results" :key="character.id">
+            <n-link
+              :to="character.id"
+              class="hover:font-bold hover:text-gray-900 leading-loose"
+              >{{ character.name }}</n-link
+            >
+          </li>
+        </ul>
+        <div class="flex-grow bg-white min-h-full">
+          <n-child :key="$route.params.id"></n-child>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -31,6 +26,7 @@
 import gql from 'graphql-tag'
 
 export default {
+  name: 'Character',
   data() {
     return {
       characterId: 1,
@@ -48,21 +44,6 @@ export default {
         }
       }
     `,
-    character: {
-      query: gql`
-        query getCharacter($id: ID!) {
-          character(id: $id) {
-            id
-            name
-          }
-        }
-      `,
-      variables() {
-        return {
-          id: this.characterId,
-        }
-      },
-    },
   },
 }
 </script>
