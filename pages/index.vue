@@ -27,6 +27,11 @@ import gql from 'graphql-tag'
 
 export default {
   name: 'Character',
+  fetch({ redirect, route }) {
+    if (!route.params.id) {
+      redirect('/1')
+    }
+  },
   data() {
     return {
       characterId: 1,
