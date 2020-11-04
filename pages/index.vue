@@ -4,6 +4,12 @@
       <h1 class="text-4xl font-semibold text-gray-800 mb-8">
         The main index page
       </h1>
+      <n-link
+        to="/create"
+        class="m-2 bg-purple-700 rounded p-2 text-white font-semibold"
+      >
+        Create Character
+      </n-link>
       <div class="flex">
         <ul class="w-64 px-2 text-gray-600">
           <li v-for="character in characters" :key="character.id">
@@ -27,25 +33,19 @@ import gql from 'graphql-tag'
 
 export default {
   name: 'Character',
-  fetch({ redirect, route }) {
-    if (!route.params.id) {
-      redirect('/1')
-    }
-  },
-  data() {
-    return {
-      characterId: 1,
-    }
-  },
-  apollo: {
-    characters: gql`
-      query getCharacters {
-        characters {
-          id
-          name
+  async asyncData({ app, redirect }) {
+    const result = await app.apolloProvider.defaultClient.query({
+      query: gql`
+        query getCharacters {
+          characters {
+            id
+            name
+          }
         }
-      }
-    `,
+      `,
+    })
+    redirect('/' + result.data.characters[0].id)
+    return result.data
   },
 }
 </script>
