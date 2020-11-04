@@ -8,7 +8,7 @@
       <span>{{ character.status }}</span>
       <h1 class="text-2xl font-semibold">{{ character.name }}</h1>
       <h1>{{ character.gender }}</h1>
-      <h1>{{ character.origin.name }}</h1>
+      <!--<h1>{{ character.origin.name }}</h1>-->
     </div>
   </div>
 </template>
@@ -26,12 +26,8 @@ export default {
             id
             name
             status
-            species
             gender
             image
-            origin {
-              name
-            }
           }
         }
       `,
