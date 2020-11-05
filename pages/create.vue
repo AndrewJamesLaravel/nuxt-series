@@ -64,8 +64,8 @@ export default {
         .mutate({
           mutation: gql`
             mutation(
-              $name: String
-              $status: String
+              $name: String!
+              $status: String!
               $gender: String
               $image: String
             ) {

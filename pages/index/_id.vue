@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="!$apollo.queries.character.loading"
-    class="rounded border m-3 flex"
+    class="rounded border m-2 flex"
   >
     <img :src="character.image" alt="img" />
     <div class="p-2">
@@ -17,7 +17,7 @@
 import gql from 'graphql-tag'
 
 export default {
-  name: 'Id',
+  name: 'Character',
   apollo: {
     character: {
       query: gql`

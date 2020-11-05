@@ -5,7 +5,7 @@
         The main index page
       </h1>
       <n-link
-        to="/create"
+        to="create"
         class="m-2 bg-purple-700 rounded p-2 text-white font-semibold"
       >
         Create Character
@@ -32,7 +32,7 @@
 import gql from 'graphql-tag'
 
 export default {
-  name: 'Character',
+  name: 'Index',
   async asyncData({ app, redirect }) {
     const result = await app.apolloProvider.defaultClient.query({
       query: gql`
